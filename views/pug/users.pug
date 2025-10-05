@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1 Користувачі
+  ul
+    each u in users
+      li: a(href=`/users/${u.id}`) #{u.name}

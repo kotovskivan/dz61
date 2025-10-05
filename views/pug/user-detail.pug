@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= user.name
+  p ID: #{user.id}
+  p Email: #{user.email}
+  p Роль: #{user.role}
+  a(href="/users") ← Назад
