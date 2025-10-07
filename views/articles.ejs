@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || 'Статті' %></title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/public/css/desktop.css">
+  <link rel="stylesheet" href="/public/css/mobile.css" media="(max-width: 767px)">
+</head>
+<body class="ui">
+<header class="classy-header">
+  <div class="classy-header__inner">
+    <a class="classy-header__brand" href="/"><img src="/public/img/logo.svg" alt="UA‑Motors" width="120" height="28"></a>
+    <nav class="classy-header__nav">
+      <a class="classy-header__link" href="/users">Користувачі (PUG)</a>
+      <a class="classy-header__link is-active" href="/articles">Статті (EJS)</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <h1 class="h1">Статті</h1>
+  <ul class="cards grid">
+    <% articles.forEach(function(a){ var author=users.find(u=>u.id===a.authorId); %>
+      <li class="card">
+        <a class="card__media" href="/articles/<%= a.slug %>">
+          <img src="<%= a.cover %>" alt="<%= a.title %>" width="320" height="180">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="/articles/<%= a.slug %>"><%= a.title %></a></h3>
+          <p class="card__meta"><%= a.date %> · <a href="/users/<%= author.id %>"><%= author.name %></a></p>
+          <p class="card__text"><%= a.excerpt %></p>
+          <div class="tags">
+            <% a.tags.forEach(function(t){ %><span class="tag"><%= t %></span><% }) %>
+          </div>
+          <p class="card__actions">
+            <a class="btn" href="/articles/<%= a.slug %>">Читати</a>
+            <a class="btn btn--ghost" href="/users/<%= author.id %>">Автор</a>
+          </p>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</main>
+<footer class="footer"><p class="footer__p">© <%= new Date().getFullYear() %> UA‑Motors</p></footer>
+</body>
+</html>
